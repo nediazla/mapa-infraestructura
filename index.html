@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="claro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Mapa de infraestructura</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<header class="barra">
+  <div class="marca">
+    <span class="marca-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="5" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="8.5" y="16" width="7" height="5" rx="1"/><path d="M6.5 8v3h11V8M12 11v5"/></svg></span>
+    <div><strong id="titulo"></strong><small id="subtitulo"></small></div>
+  </div>
+  <div class="estado" id="estado"><i></i><span>Todo operativo</span></div>
+  <div class="acciones">
+    <button class="btn" id="btnTour"><svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></svg><span>Tour guiado</span></button>
+    <button class="btn" id="btnTema" aria-label="Cambiar tema"><svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+  </div>
+</header>
+
+<nav class="capas" id="capas" aria-label="Resaltar zona"></nav>
+
+<main class="lienzo" id="lienzo">
+  <svg id="mapa" class="mapa" role="img" aria-label="Diagrama isométrico de la infraestructura de red"></svg>
+
+  <!-- Simulaciones -->
+  <section class="sims vidrio" id="sims">
+    <h2>Simular</h2>
+    <button data-sim="isp"><span>🌐</span>Cae la fibra</button>
+    <button data-sim="fw1"><span>🧱</span>Falla el firewall 1</button>
+    <button data-sim="core1"><span>🧠</span>Falla el núcleo 1</button>
+    <button data-sim="ataque"><span>🛡️</span>Ataque desde Internet</button>
+    <button data-sim="backup"><span>💾</span>Copia de seguridad 3-2-1</button>
+    <button data-sim="nada" class="restaurar"><span>↺</span>Restablecer</button>
+  </section>
+
+  <!-- Leyenda -->
+  <section class="leyenda vidrio" id="leyenda">
+    <button class="ley-tit" id="leyTit" aria-expanded="true">Leyenda</button>
+    <ul>
+      <li><i class="l-wan"></i>WAN / Internet</li>
+      <li><i class="l-fibra"></i>Fibra 10 Gbps</li>
+      <li><i class="l-cobre"></i>Cobre 1 Gbps</li>
+      <li><i class="l-ha"></i>Alta disponibilidad / stack</li>
+      <li><i class="l-vpn"></i>Túnel VPN cifrado</li>
+      <li><i class="l-wifi"></i>WiFi</li>
+      <li><i class="l-standby"></i>Respaldo (en espera)</li>
+      <li><i class="l-caido"></i>Enlace caído</li>
+    </ul>
+  </section>
+
+  <!-- Zoom -->
+  <div class="zoom vidrio">
+    <button id="zMas" aria-label="Acercar">+</button>
+    <button id="zMenos" aria-label="Alejar">−</button>
+    <button id="zAjustar" aria-label="Ajustar a la pantalla"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+
+  <!-- Banner de simulación / tour -->
+  <div class="banner vidrio" id="banner" hidden>
+    <div class="banner-cab"><strong id="banTit"></strong><button id="banCerrar" aria-label="Cerrar">×</button></div>
+    <ol id="banPasos"></ol>
+    <div class="banner-pie" id="banPie"></div>
+  </div>
+
+  <!-- Ficha del equipo -->
+  <aside class="ficha vidrio" id="ficha" hidden>
+    <button class="ficha-x" id="fichaX" aria-label="Cerrar ficha">×</button>
+    <div id="fichaIn"></div>
+  </aside>
+
+  <div class="tip" id="tip" role="tooltip"></div>
+</main>
+
+<footer class="pie">
+  <span id="resumen"></span>
+  <span id="pieTexto"></span>
+</footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="datos.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
